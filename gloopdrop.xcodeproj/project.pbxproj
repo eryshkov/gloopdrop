@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C413F1926C0178A004B1EF1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C413F1826C0178A004B1EF1 /* Player.swift */; };
+		5C413F1B26C01887004B1EF1 /* SpriteKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C413F1A26C01887004B1EF1 /* SpriteKitHelper.swift */; };
 		5CBB3BCB26AA020400B9D999 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB3BCA26AA020400B9D999 /* AppDelegate.swift */; };
 		5CBB3BD126AA020400B9D999 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB3BD026AA020400B9D999 /* GameScene.swift */; };
 		5CBB3BD326AA020400B9D999 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB3BD226AA020400B9D999 /* GameViewController.swift */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C413F1826C0178A004B1EF1 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		5C413F1A26C01887004B1EF1 /* SpriteKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitHelper.swift; sourceTree = "<group>"; };
 		5CBB3BC726AA020400B9D999 /* gloopdrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gloopdrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CBB3BCA26AA020400B9D999 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CBB3BD026AA020400B9D999 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 				5CBB3BD226AA020400B9D999 /* GameViewController.swift */,
 				5CBB3BD426AA020400B9D999 /* Main.storyboard */,
 				5CBB3BD726AA020700B9D999 /* Assets.xcassets */,
+				5C413F1826C0178A004B1EF1 /* Player.swift */,
+				5C413F1A26C01887004B1EF1 /* SpriteKitHelper.swift */,
 				5CBB3BD926AA020700B9D999 /* Info.plist */,
 			);
 			path = gloopdrop;
@@ -133,8 +139,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C413F1926C0178A004B1EF1 /* Player.swift in Sources */,
 				5CBB3BD126AA020400B9D999 /* GameScene.swift in Sources */,
 				5CBB3BD326AA020400B9D999 /* GameViewController.swift in Sources */,
+				5C413F1B26C01887004B1EF1 /* SpriteKitHelper.swift in Sources */,
 				5CBB3BCB26AA020400B9D999 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
