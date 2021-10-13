@@ -8,6 +8,14 @@
 import Foundation
 import SpriteKit
 
+//MARK: -SPRITEKIT HELPERS
+
+enum Layer: CGFloat {
+    case background
+    case foreground
+    case player
+}
+
 //MARK: - SPRITEKIT EXTENSIONS
 
 extension SKSpriteNode {

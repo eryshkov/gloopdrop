@@ -24,6 +24,7 @@ class Player: SKSpriteNode {
         self.name = "player"
         self.setScale(1)
         self.anchorPoint = CGPoint(x: 0.5, y: 0)
+        self.zPosition = Layer.player.rawValue;
     }
 
     required init?(coder aDecoder: NSCoder) {
