@@ -30,7 +30,7 @@ class GameScene: SKScene {
         player.walk()
     }
 
-    // MARK: - TOUCH HANDLING.
+    // MARK: - TOUCH HANDLING
 
     func touchDown(atPoint pos: CGPoint) {
         if pos.x < player.position.x {
