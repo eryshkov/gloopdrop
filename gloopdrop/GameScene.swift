@@ -32,13 +32,20 @@ class GameScene: SKScene {
 
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipedRight(sender:)))
         swipeRight.direction = .right
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipedLeft(sender:)))
+        swipeLeft.direction = .left
         view.addGestureRecognizer(swipeRight)
+        view.addGestureRecognizer(swipeLeft)
     }
 
     // MARK: - TOUCH HANDLING
 
     @objc func swipedRight(sender: UIGestureRecognizer) {
         player.moveToPosition(pos: CGPoint(x: self.size.width, y: 0), direction: "R", speed: 1)
+    }
+
+    @objc func swipedLeft(sender: UIGestureRecognizer) {
+        player.moveToPosition(pos: CGPoint(x: 0, y: 0), direction: "L", speed: 1)
     }
 
     func touchDown(atPoint pos: CGPoint) {
