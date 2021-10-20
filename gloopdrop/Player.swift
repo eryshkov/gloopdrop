@@ -48,7 +48,14 @@ class Player: SKSpriteNode {
         startAnimation(textures: walkTextures, speed: 0.25, name: PlayerAnimationType.walk.rawValue, count: 0, resize: true, restore: true)
     }
 
-    func moveToPosition(pos: CGPoint, speed: TimeInterval) {
+    func moveToPosition(pos: CGPoint, direction: String, speed: TimeInterval) {
+        switch direction {
+        case "L":
+            xScale = -abs(xScale)
+        default:
+            xScale = abs(xScale)
+        }
+
         let moveAction = SKAction.move(to: pos, duration: speed)
         run(moveAction)
     }

@@ -33,7 +33,11 @@ class GameScene: SKScene {
     // MARK: - TOUCH HANDLING
 
     func touchDown(atPoint pos: CGPoint) {
-        player.moveToPosition(pos: pos, speed: 1)
+        if pos.x < player.position.x {
+            player.moveToPosition(pos: pos, direction: "L", speed: 1)
+        } else {
+            player.moveToPosition(pos: pos, direction: "R", speed: 1)
+        }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
