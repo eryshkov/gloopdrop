@@ -8,6 +8,8 @@
 import SpriteKit
 import GameplayKit
 class GameScene: SKScene {
+    let player = Player()
+
     override func didMove(to view: SKView) {
         // Set up background
         let background = SKSpriteNode(imageNamed: "background_1")
@@ -22,7 +24,6 @@ class GameScene: SKScene {
         foreground.zPosition = Layer.foreground.rawValue
         addChild(foreground)
         
-        let player = Player()
         player.position = CGPoint(x: size.width/2, y: foreground.frame.maxY)
         addChild(player)
         player.walk()
