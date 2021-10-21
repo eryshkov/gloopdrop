@@ -33,11 +33,12 @@ class Player: SKSpriteNode {
     
     // MARK: - METHODS
 
-    func setupConstraints(floor: CGFloat) {
+    func setupConstraints(floor: CGFloat, sceneWidth: CGFloat) {
         let range = SKRange(lowerLimit: floor, upperLimit: floor)
         let lockToPlatform = SKConstraint.positionY(range)
+        let lockToScene = SKConstraint.positionX(SKRange(lowerLimit: self.size.width / 2, upperLimit: sceneWidth - self.size.width / 2))
 
-        constraints = [lockToPlatform]
+        constraints = [lockToPlatform, lockToScene]
     }
 
     func walk() {
