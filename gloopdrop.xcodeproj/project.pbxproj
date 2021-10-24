@@ -14,6 +14,7 @@
 		5CBB3BD326AA020400B9D999 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBB3BD226AA020400B9D999 /* GameViewController.swift */; };
 		5CBB3BD626AA020400B9D999 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CBB3BD426AA020400B9D999 /* Main.storyboard */; };
 		5CBB3BD826AA020700B9D999 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CBB3BD726AA020700B9D999 /* Assets.xcassets */; };
+		5CF12B992725DA3400EFD39E /* Collectible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF12B982725DA3400EFD39E /* Collectible.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		5CBB3BD526AA020400B9D999 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5CBB3BD726AA020700B9D999 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CBB3BD926AA020700B9D999 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CF12B982725DA3400EFD39E /* Collectible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collectible.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				5CBB3BCA26AA020400B9D999 /* AppDelegate.swift */,
 				5CBB3BD026AA020400B9D999 /* GameScene.swift */,
 				5CBB3BD226AA020400B9D999 /* GameViewController.swift */,
+				5CF12B982725DA3400EFD39E /* Collectible.swift */,
 				5CBB3BD426AA020400B9D999 /* Main.storyboard */,
 				5CBB3BD726AA020700B9D999 /* Assets.xcassets */,
 				5C413F1826C0178A004B1EF1 /* Player.swift */,
@@ -141,6 +144,7 @@
 			files = (
 				5C413F1926C0178A004B1EF1 /* Player.swift in Sources */,
 				5CBB3BD126AA020400B9D999 /* GameScene.swift in Sources */,
+				5CF12B992725DA3400EFD39E /* Collectible.swift in Sources */,
 				5CBB3BD326AA020400B9D999 /* GameViewController.swift in Sources */,
 				5C413F1B26C01887004B1EF1 /* SpriteKitHelper.swift in Sources */,
 				5CBB3BCB26AA020400B9D999 /* AppDelegate.swift in Sources */,
