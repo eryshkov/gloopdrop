@@ -50,6 +50,7 @@ class GameScene: SKScene {
         let collectible = Collectible(collectibleType: CollectibleType.gloop)
         collectible.position = CGPoint(x: player.position.x, y: player.position.y * 2.5)
         addChild(collectible)
+        collectible.drop(dropSpeed: TimeInterval(1), floorLevel: player.frame.minY)
     }
 
     // MARK: - TOUCH HANDLING

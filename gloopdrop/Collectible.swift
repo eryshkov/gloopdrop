@@ -39,4 +39,19 @@ class Collectible: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func drop(dropSpeed: TimeInterval, floorLevel: CGFloat) {
+        let pos = CGPoint(x: position.x, y: floorLevel)
+
+        let scaleX = SKAction.scaleX(to: 1, duration: 1)
+        let scaleY = SKAction.scaleY(to: 1.3, duration: 1)
+        let scale = SKAction.group([scaleX, scaleY])
+
+        let appear = SKAction.fadeAlpha(to: 1, duration: dropSpeed)
+        let moveAction = SKAction.move(to: pos, duration: dropSpeed)
+        let actionSequence = SKAction.sequence([appear, scale, moveAction])
+
+        self.scale(to: CGSize(width: 0.25, height: 1))
+        self.run(actionSequence, withKey: "drop")
+    }
 }
