@@ -29,6 +29,7 @@ class GameScene: SKScene {
         player.position = CGPoint(x: size.width / 2, y: foreground.frame.maxY)
         player.setupConstraints(floor: foreground.frame.maxY, sceneWidth: self.size.width)
         addChild(player)
+        spawnGloop()
         player.walk()
 
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipedRight(sender:)))
@@ -43,6 +44,12 @@ class GameScene: SKScene {
 
         view.addGestureRecognizer(swipeRight)
         view.addGestureRecognizer(swipeLeft)
+    }
+
+    func spawnGloop() {
+        let collectible = Collectible(collectibleType: CollectibleType.gloop)
+        collectible.position = CGPoint(x: player.position.x, y: player.position.y * 2.5)
+        addChild(collectible)
     }
 
     // MARK: - TOUCH HANDLING
