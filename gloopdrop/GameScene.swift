@@ -11,6 +11,8 @@ import GameplayKit
 class GameScene: SKScene {
     let player = Player()
     let playerSpeed: CGFloat = 1.5
+    var level: Int = 1
+    var numberOfDrops: Int = 10
 
     override func didMove(to view: SKView) {
         // Set up background
@@ -60,10 +62,23 @@ class GameScene: SKScene {
     }
 
     func spawnMultipleGloops() {
+        switch level {
+        case 1, 2, 3, 4, 5:
+            numberOfDrops = level * 10
+        case 6:
+            numberOfDrops = 75
+        case 7:
+            numberOfDrops = 100
+        case 8:
+            numberOfDrops = 150
+        default:
+            numberOfDrops = 150
+        }
+
         let wait = SKAction.wait(forDuration: TimeInterval(1))
         let spawn = SKAction.run { [unowned self] in self.spawnGloop() }
         let sequence = SKAction.sequence([wait, spawn])
-        let repeatAction = SKAction.repeat(sequence, count: 10)
+        let repeatAction = SKAction.repeat(sequence, count: numberOfDrops)
 
         run(repeatAction, withKey: "gloop")
     }
