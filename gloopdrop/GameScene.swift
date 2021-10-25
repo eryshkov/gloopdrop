@@ -29,7 +29,6 @@ class GameScene: SKScene {
         player.position = CGPoint(x: size.width / 2, y: foreground.frame.maxY)
         player.setupConstraints(floor: foreground.frame.maxY, sceneWidth: self.size.width)
         addChild(player)
-        spawnGloop()
         player.walk()
 
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipedRight(sender:)))
@@ -44,13 +43,29 @@ class GameScene: SKScene {
 
         view.addGestureRecognizer(swipeRight)
         view.addGestureRecognizer(swipeLeft)
+
+        spawnMultipleGloops()
     }
 
     func spawnGloop() {
         let collectible = Collectible(collectibleType: CollectibleType.gloop)
-        collectible.position = CGPoint(x: player.position.x, y: player.position.y * 2.5)
+
+        let margin = collectible.size.width * 2
+        let dropRange = SKRange(lowerLimit: frame.minX + margin, upperLimit: frame.maxX - margin)
+        let randomX = CGFloat.random(in: dropRange.lowerLimit ... dropRange.upperLimit)
+
+        collectible.position = CGPoint(x: randomX, y: player.position.y * 2.5)
         addChild(collectible)
         collectible.drop(dropSpeed: TimeInterval(1), floorLevel: player.frame.minY)
+    }
+
+    func spawnMultipleGloops() {
+        let wait = SKAction.wait(forDuration: TimeInterval(1))
+        let spawn = SKAction.run { [unowned self] in self.spawnGloop() }
+        let sequence = SKAction.sequence([wait, spawn])
+        let repeatAction = SKAction.repeat(sequence, count: 10)
+
+        run(repeatAction, withKey: "gloop")
     }
 
     // MARK: - TOUCH HANDLING
