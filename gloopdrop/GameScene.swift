@@ -11,8 +11,13 @@ import GameplayKit
 class GameScene: SKScene {
     let player = Player()
     let playerSpeed: CGFloat = 1.5
+
     var level: Int = 1
     var numberOfDrops: Int = 10
+
+    var dropSpeed: CGFloat = 1
+    var minDropSpeed: CGFloat = 0.12
+    var maxDropSpeed: CGFloat = 1
 
     override func didMove(to view: SKView) {
         // Set up background
@@ -75,7 +80,14 @@ class GameScene: SKScene {
             numberOfDrops = 150
         }
 
-        let wait = SKAction.wait(forDuration: TimeInterval(1))
+        dropSpeed = 1 / (CGFloat(level) + (CGFloat(level) / CGFloat(numberOfDrops)))
+        if dropSpeed < minDropSpeed {
+            dropSpeed = minDropSpeed
+        } else if dropSpeed > maxDropSpeed {
+            dropSpeed = maxDropSpeed
+        }
+
+        let wait = SKAction.wait(forDuration: TimeInterval(dropSpeed))
         let spawn = SKAction.run { [unowned self] in self.spawnGloop() }
         let sequence = SKAction.sequence([wait, spawn])
         let repeatAction = SKAction.repeat(sequence, count: numberOfDrops)
