@@ -11,6 +11,8 @@ import GameplayKit
 class GameScene: SKScene {
     let player = Player()
     let playerSpeed: CGFloat = 1.5
+    var movingPlayer = false
+    var lastPosition: CGPoint?
 
     var level: Int = 1
     var numberOfDrops: Int = 10
@@ -108,13 +110,30 @@ class GameScene: SKScene {
     }
 
     func touchDown(atPoint pos: CGPoint) {
-        let distance = hypot(pos.x - player.position.x, pos.y - player.position.y)
-        let calculatedSpeed = TimeInterval(distance / playerSpeed) / 255
-        if pos.x < player.position.x {
-            player.moveToPosition(pos: pos, direction: "L", speed: calculatedSpeed)
-        } else {
-            player.moveToPosition(pos: pos, direction: "R", speed: calculatedSpeed)
+        let touchedNode = atPoint(pos)
+        if touchedNode.name == "player" {
+            movingPlayer = true
         }
+    }
+
+    func touchMoved(toPoint pos: CGPoint) {
+        if movingPlayer == true {
+            let newPos = CGPoint(x: pos.x, y: player.position.y)
+            player.position = newPos
+
+            let recordedPosition = lastPosition ?? player.position
+            if recordedPosition.x > newPos.x {
+                player.xScale = -abs(xScale)
+            } else {
+                player.xScale = abs(xScale)
+            }
+
+            lastPosition = newPos
+        }
+    }
+
+    func touchUp(atPoint pos: CGPoint) {
+        movingPlayer = false
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -123,5 +142,29 @@ class GameScene: SKScene {
             return
         }
         self.touchDown(atPoint: touch.location(in: self))
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        guard let touch = touches.first else {
+            return
+        }
+        self.touchMoved(toPoint: touch.location(in: self))
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        guard let touch = touches.first else {
+            return
+        }
+        self.touchUp(atPoint: touch.location(in: self))
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        guard let touch = touches.first else {
+            return
+        }
+        self.touchUp(atPoint: touch.location(in: self))
     }
 }
