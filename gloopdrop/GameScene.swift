@@ -38,19 +38,6 @@ class GameScene: SKScene {
         addChild(player)
         player.walk()
 
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipedRight(sender:)))
-        swipeRight.direction = .right
-        swipeRight.cancelsTouchesInView = true
-        swipeRight.delaysTouchesBegan = true
-
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipedLeft(sender:)))
-        swipeLeft.direction = .left
-        swipeLeft.cancelsTouchesInView = true
-        swipeLeft.delaysTouchesBegan = true
-
-        view.addGestureRecognizer(swipeRight)
-        view.addGestureRecognizer(swipeLeft)
-
         spawnMultipleGloops()
     }
 
@@ -96,6 +83,21 @@ class GameScene: SKScene {
     }
 
     // MARK: - TOUCH HANDLING
+
+    func swipeInit(to view: SKView) {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipedRight(sender:)))
+        swipeRight.direction = .right
+        swipeRight.cancelsTouchesInView = true
+        swipeRight.delaysTouchesBegan = true
+
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipedLeft(sender:)))
+        swipeLeft.direction = .left
+        swipeLeft.cancelsTouchesInView = true
+        swipeLeft.delaysTouchesBegan = true
+
+        view.addGestureRecognizer(swipeRight)
+        view.addGestureRecognizer(swipeLeft)
+    }
 
     @objc func swipedRight(sender: UIGestureRecognizer) {
         player.moveToPosition(pos: CGPoint(x: self.size.width, y: 0), direction: "R", speed: 1)
