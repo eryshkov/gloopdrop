@@ -25,6 +25,8 @@ class Player: SKSpriteNode {
         self.setScale(1)
         self.anchorPoint = CGPoint(x: 0.5, y: 0)
         self.zPosition = Layer.player.rawValue;
+        self.physicsBody = SKPhysicsBody(rectangleOf: self.size, center: CGPoint(x: 0, y: self.size.height/2))
+        self.physicsBody?.affectedByGravity = false
     }
 
     required init?(coder aDecoder: NSCoder) {

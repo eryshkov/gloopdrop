@@ -33,6 +33,8 @@ class GameScene: SKScene {
         foreground.anchorPoint = CGPoint.zero
         foreground.position = CGPoint(x: 0, y: 0)
         foreground.zPosition = Layer.foreground.rawValue
+        foreground.physicsBody = SKPhysicsBody(edgeLoopFrom: foreground.frame)
+        foreground.physicsBody?.affectedByGravity = false
         addChild(foreground)
 
         player.position = CGPoint(x: size.width / 2, y: foreground.frame.maxY)

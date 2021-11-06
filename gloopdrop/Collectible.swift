@@ -34,6 +34,8 @@ class Collectible: SKSpriteNode {
         self.name = "co_\(collectibleType)"
         self.anchorPoint = CGPoint(x: 0.5, y: 1)
         self.zPosition = Layer.collectible.rawValue
+        self.physicsBody = SKPhysicsBody(rectangleOf: self.size, center: CGPoint(x: 0, y: -self.size.height))
+        self.physicsBody?.affectedByGravity = false
     }
 
     required init?(coder aDecoder: NSCoder) {
