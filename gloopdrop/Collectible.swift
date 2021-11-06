@@ -36,6 +36,9 @@ class Collectible: SKSpriteNode {
         self.zPosition = Layer.collectible.rawValue
         self.physicsBody = SKPhysicsBody(rectangleOf: self.size, center: CGPoint(x: 0, y: -self.size.height))
         self.physicsBody?.affectedByGravity = false
+        self.physicsBody?.categoryBitMask = PhysicsCategory.collectible
+        self.physicsBody?.contactTestBitMask = PhysicsCategory.player | PhysicsCategory.foreground
+        self.physicsBody?.collisionBitMask = PhysicsCategory.none
     }
 
     required init?(coder aDecoder: NSCoder) {

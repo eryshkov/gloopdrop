@@ -35,6 +35,9 @@ class GameScene: SKScene {
         foreground.zPosition = Layer.foreground.rawValue
         foreground.physicsBody = SKPhysicsBody(edgeLoopFrom: foreground.frame)
         foreground.physicsBody?.affectedByGravity = false
+        foreground.physicsBody?.categoryBitMask = PhysicsCategory.foreground
+        foreground.physicsBody?.contactTestBitMask = PhysicsCategory.collectible
+        foreground.physicsBody?.collisionBitMask = PhysicsCategory.none
         addChild(foreground)
 
         player.position = CGPoint(x: size.width / 2, y: foreground.frame.maxY)
