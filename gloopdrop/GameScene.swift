@@ -22,6 +22,7 @@ class GameScene: SKScene {
     var maxDropSpeed: CGFloat = 1
 
     override func didMove(to view: SKView) {
+        physicsWorld.contactDelegate = self
         // Set up background
         let background = SKSpriteNode(imageNamed: "background_1")
         background.anchorPoint = CGPoint.zero
@@ -171,5 +172,27 @@ class GameScene: SKScene {
             return
         }
         self.touchUp(atPoint: touch.location(in: self))
+    }
+}
+
+extension GameScene: SKPhysicsContactDelegate {
+    public func didBegin(_ contact: SKPhysicsContact) {
+        let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        if collision == PhysicsCategory.player | PhysicsCategory.collectible {
+            let body = contact.bodyA.categoryBitMask == PhysicsCategory.collectible ? contact.bodyA.node : contact.bodyB.node
+            if let sprite = body as? Collectible {
+                sprite.collected()
+            }
+        }
+
+        if collision == PhysicsCategory.foreground | PhysicsCategory.collectible {
+            let body = contact.bodyA.categoryBitMask == PhysicsCategory.collectible ? contact.bodyA.node : contact.bodyB.node
+            if let sprite = body as? Collectible {
+                sprite.missed()
+            }
+        }
+    }
+
+    public func didEnd(_ contact: SKPhysicsContact) {
     }
 }
