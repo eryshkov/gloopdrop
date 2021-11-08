@@ -70,4 +70,13 @@ extension SKScene {
         guard let view = view else {return 0}
         return convertPoint(fromView: CGPoint(x: 0, y: view.bounds.size.height)).y
     }
+
+    func viewLeft() -> CGFloat {
+        return convertPoint(fromView: CGPoint(x: 0, y: 0)).x
+    }
+
+    func viewRight() -> CGFloat {
+        guard let view = view else {return 100}
+        return convertPoint(fromView: CGPoint(x: view.bounds.size.width, y: 0)).x
+    }
 }

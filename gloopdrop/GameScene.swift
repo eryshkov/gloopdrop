@@ -10,9 +10,6 @@ import GameplayKit
 
 class GameScene: SKScene {
     let player = Player()
-    let playerSpeed: CGFloat = 1.5
-    var movingPlayer = false
-    var lastPosition: CGPoint?
 
     var level: Int = 1 {
         didSet {
@@ -60,6 +57,7 @@ class GameScene: SKScene {
         addChild(player)
         setupLabels()
         player.walk()
+        swipeInit(to: self.view!)
 
         spawnMultipleGloops()
     }
@@ -147,70 +145,11 @@ class GameScene: SKScene {
     }
 
     @objc func swipedRight(sender: UIGestureRecognizer) {
-        player.moveToPosition(pos: CGPoint(x: self.size.width, y: 0), direction: "R", speed: 1)
+        player.moveToPosition(x: viewRight() - player.size.width / 2, direction: "R", speed: 1)
     }
 
     @objc func swipedLeft(sender: UIGestureRecognizer) {
-        player.moveToPosition(pos: CGPoint(x: 0, y: 0), direction: "L", speed: 1)
-    }
-
-    func touchDown(atPoint pos: CGPoint) {
-        let touchedNode = atPoint(pos)
-        if touchedNode.name == "player" {
-            movingPlayer = true
-        }
-    }
-
-    func touchMoved(toPoint pos: CGPoint) {
-        if movingPlayer == true {
-            let newPos = CGPoint(x: pos.x, y: player.position.y)
-            player.position = newPos
-
-            let recordedPosition = lastPosition ?? player.position
-            if recordedPosition.x > newPos.x {
-                player.xScale = -abs(xScale)
-            } else {
-                player.xScale = abs(xScale)
-            }
-
-            lastPosition = newPos
-        }
-    }
-
-    func touchUp(atPoint pos: CGPoint) {
-        movingPlayer = false
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        guard let touch = touches.first else {
-            return
-        }
-        self.touchDown(atPoint: touch.location(in: self))
-    }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        guard let touch = touches.first else {
-            return
-        }
-        self.touchMoved(toPoint: touch.location(in: self))
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        guard let touch = touches.first else {
-            return
-        }
-        self.touchUp(atPoint: touch.location(in: self))
-    }
-
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-        guard let touch = touches.first else {
-            return
-        }
-        self.touchUp(atPoint: touch.location(in: self))
+        player.moveToPosition(x: viewLeft() + player.size.width / 2, direction: "L", speed: 1)
     }
 }
 
