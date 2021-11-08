@@ -47,9 +47,34 @@ class GameScene: SKScene {
         player.position = CGPoint(x: size.width / 2, y: foreground.frame.maxY)
         player.setupConstraints(floor: foreground.frame.maxY, sceneWidth: self.size.width)
         addChild(player)
+        setupLabels()
         player.walk()
 
         spawnMultipleGloops()
+    }
+
+    func setupLabels() {
+        scoreLabel.name = "score"
+        scoreLabel.fontName = "Nosifer"
+        scoreLabel.fontColor = .yellow
+        scoreLabel.fontSize = 35
+        scoreLabel.horizontalAlignmentMode = .right
+        scoreLabel.verticalAlignmentMode = .center
+        scoreLabel.zPosition = Layer.ui.rawValue
+        scoreLabel.position = CGPoint(x: frame.maxX - 50, y: viewTop() - 100)
+        scoreLabel.text = "Score: 0"
+        addChild(scoreLabel)
+
+        levelLabel.name = "level"
+        levelLabel.fontName = "Nosifer"
+        levelLabel.fontColor = .yellow
+        levelLabel.fontSize = 35
+        levelLabel.horizontalAlignmentMode = .left
+        levelLabel.verticalAlignmentMode = .center
+        levelLabel.zPosition = Layer.ui.rawValue
+        levelLabel.position = CGPoint(x: frame.minX + 50, y: viewTop() - 100)
+        levelLabel.text = "Level: \(level)"
+        addChild(levelLabel)
     }
 
     func spawnGloop() {
