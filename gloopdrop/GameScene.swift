@@ -21,6 +21,9 @@ class GameScene: SKScene {
     var minDropSpeed: CGFloat = 0.12
     var maxDropSpeed: CGFloat = 1
 
+    var scoreLabel: SKLabelNode = SKLabelNode()
+    var levelLabel: SKLabelNode = SKLabelNode()
+
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         // Set up background

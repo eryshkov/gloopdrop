@@ -19,7 +19,8 @@ class GameViewController: UIViewController {
             // Set the scale mode to scale to fill the view window
             scene.scaleMode = .aspectFill
             // Set the background color
-            scene.backgroundColor = UIColor(red: 105/255, green: 157/255,
+            scene.backgroundColor = UIColor(red: 105/255,
+                                            green: 157/255,
                                             blue: 181/255,
                                             alpha: 1.0)
             
