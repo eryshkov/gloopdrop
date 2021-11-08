@@ -14,7 +14,18 @@ class GameScene: SKScene {
     var movingPlayer = false
     var lastPosition: CGPoint?
 
-    var level: Int = 1
+    var level: Int = 1 {
+        didSet {
+            levelLabel.text = "Level: \(level)"
+        }
+    }
+
+    var score: Int = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
+
     var numberOfDrops: Int = 10
 
     var dropSpeed: CGFloat = 1
@@ -210,6 +221,7 @@ extension GameScene: SKPhysicsContactDelegate {
             let body = contact.bodyA.categoryBitMask == PhysicsCategory.collectible ? contact.bodyA.node : contact.bodyB.node
             if let sprite = body as? Collectible {
                 sprite.collected()
+                score += level
             }
         }
 
