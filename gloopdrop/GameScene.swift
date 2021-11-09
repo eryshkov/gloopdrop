@@ -145,23 +145,13 @@ class GameScene: SKScene {
     }
 
     @objc func swipedRight(sender: UIGestureRecognizer) {
-        sender.isEnabled = false
-        print("swipe right disabled")
+        player.removeAction(forKey: "player_moving")
         player.moveToPosition(x: viewRight() - player.size.width / 2, direction: "R", speed: 1)
-        { [weak sender]() -> Void in
-            sender?.isEnabled = true
-            print("swipe right enabled")
-        }
     }
 
     @objc func swipedLeft(sender: UIGestureRecognizer) {
-        sender.isEnabled = false
-        print("swipe left disabled")
+        player.removeAction(forKey: "player_moving")
         player.moveToPosition(x: viewLeft() + player.size.width / 2, direction: "L", speed: 1)
-        { [weak sender]() -> Void in
-            sender?.isEnabled = true
-            print("swipe left enabled")
-        }
     }
 }
 

@@ -54,7 +54,7 @@ class Player: SKSpriteNode {
         startAnimation(textures: walkTextures, speed: 0.25, name: PlayerAnimationType.walk.rawValue, count: 0, resize: true, restore: true)
     }
 
-    func moveToPosition(x: CGFloat, direction: String, speed: TimeInterval, closure: @escaping () -> Void) {
+    func moveToPosition(x: CGFloat, direction: String, speed: TimeInterval) {
         switch direction {
         case "L":
             xScale = -abs(xScale)
@@ -62,9 +62,10 @@ class Player: SKSpriteNode {
             xScale = abs(xScale)
         }
 
-        let moveAction = SKAction.moveTo(x: x, duration: speed)
-        let closureAction = SKAction.run(closure)
-        let sequence = SKAction.sequence([moveAction, closureAction])
-        run(sequence)
+        let distance = abs(self.position.x - x)
+        let calculatedSpeed = TimeInterval(distance / speed) / 255
+
+        let moveAction = SKAction.moveTo(x: x, duration: calculatedSpeed)
+        run(moveAction, withKey: "player_moving")
     }
 }
