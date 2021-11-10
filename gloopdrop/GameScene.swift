@@ -127,6 +127,16 @@ class GameScene: SKScene {
         run(repeatAction, withKey: "gloop")
     }
 
+    func gameOver() {
+        player.die()
+        removeAction(forKey: "gloop")
+
+        enumerateChildNodes(withName: "co_*") { (node, stop)  in
+            node.removeAction(forKey: "drop")
+            node.physicsBody = nil
+        }
+    }
+
     // MARK: - TOUCH HANDLING
 
     func swipeInit(to view: SKView) {
@@ -175,6 +185,7 @@ extension GameScene: SKPhysicsContactDelegate {
             let body = contact.bodyA.categoryBitMask == PhysicsCategory.collectible ? contact.bodyA.node : contact.bodyB.node
             if let sprite = body as? Collectible {
                 sprite.missed()
+                gameOver()
             }
         }
     }
