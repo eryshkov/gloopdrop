@@ -145,18 +145,18 @@ class GameScene: SKScene {
     }
 
     @objc func swipedRight(sender: UIGestureRecognizer) {
-        player.removeAction(forKey: "player_moving")
-        player.moveToPosition(x: viewRight() - player.size.width / 2, direction: "R", speed: 1)
+        player.removeAction(forKey: PlayerActionType.moving.rawValue)
+        player.moveToPosition(x: viewRight() - player.size.width / 2, direction: .right, speed: player.movingSpeed)
     }
 
     @objc func swipedLeft(sender: UIGestureRecognizer) {
-        player.removeAction(forKey: "player_moving")
-        player.moveToPosition(x: viewLeft() + player.size.width / 2, direction: "L", speed: 1)
+        player.removeAction(forKey: PlayerActionType.moving.rawValue)
+        player.moveToPosition(x: viewLeft() + player.size.width / 2, direction: .left, speed: player.movingSpeed)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let _ = touches.first else { return }
-        player.removeAction(forKey: "player_moving")
+        player.removeAction(forKey: PlayerActionType.moving.rawValue)
     }
 }
 

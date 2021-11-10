@@ -12,9 +12,19 @@ enum PlayerAnimationType: String {
     case walk
 }
 
+enum PlayerActionType: String {
+    case moving
+}
+
+enum PlayerMovingDirection: String {
+    case left
+    case right
+}
+
 class Player: SKSpriteNode {
     // MARK: - Properties
     private var walkTextures: [SKTexture]?
+    public var movingSpeed: Double = 2
     
     // MARK: - INIT
     init() {
@@ -54,9 +64,9 @@ class Player: SKSpriteNode {
         startAnimation(textures: walkTextures, speed: 0.25, name: PlayerAnimationType.walk.rawValue, count: 0, resize: true, restore: true)
     }
 
-    func moveToPosition(x: CGFloat, direction: String, speed: TimeInterval) {
+    func moveToPosition(x: CGFloat, direction: PlayerMovingDirection, speed: TimeInterval) {
         switch direction {
-        case "L":
+        case .left:
             xScale = -abs(xScale)
         default:
             xScale = abs(xScale)
@@ -66,6 +76,6 @@ class Player: SKSpriteNode {
         let calculatedSpeed = TimeInterval(distance / speed) / 255
 
         let moveAction = SKAction.moveTo(x: x, duration: calculatedSpeed)
-        run(moveAction, withKey: "player_moving")
+        run(moveAction, withKey: PlayerActionType.moving.rawValue)
     }
 }
