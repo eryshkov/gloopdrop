@@ -153,6 +153,11 @@ class GameScene: SKScene {
         player.removeAction(forKey: "player_moving")
         player.moveToPosition(x: viewLeft() + player.size.width / 2, direction: "L", speed: 1)
     }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let _ = touches.first else { return }
+        player.removeAction(forKey: "player_moving")
+    }
 }
 
 extension GameScene: SKPhysicsContactDelegate {
