@@ -32,6 +32,8 @@ class GameScene: SKScene {
     var scoreLabel: SKLabelNode = SKLabelNode()
     var levelLabel: SKLabelNode = SKLabelNode()
 
+    var gameInProgress = false
+
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         // Set up background
@@ -56,10 +58,7 @@ class GameScene: SKScene {
         player.setupConstraints(floor: foreground.frame.maxY, sceneWidth: self.size.width)
         addChild(player)
         setupLabels()
-        player.walk()
         swipeInit(to: self.view!)
-
-        spawnMultipleGloops()
     }
 
     func setupLabels() {
@@ -93,12 +92,18 @@ class GameScene: SKScene {
         let dropRange = SKRange(lowerLimit: frame.minX + margin, upperLimit: frame.maxX - margin)
         let randomX = CGFloat.random(in: dropRange.lowerLimit ... dropRange.upperLimit)
 
-        collectible.position = CGPoint(x: randomX, y: player.position.y * 2.5)
+        collectible.position = CGPoint(x: randomX, y: viewTop())
         addChild(collectible)
         collectible.drop(dropSpeed: TimeInterval(1), floorLevel: player.frame.minY)
     }
 
     func spawnMultipleGloops() {
+        player.walk()
+        if !gameInProgress {
+            score = 0
+            level = 1
+        }
+
         switch level {
         case 1, 2, 3, 4, 5:
             numberOfDrops = level * 10
@@ -125,15 +130,42 @@ class GameScene: SKScene {
         let repeatAction = SKAction.repeat(sequence, count: numberOfDrops)
 
         run(repeatAction, withKey: "gloop")
+
+        gameInProgress = true
     }
 
     func gameOver() {
+        gameInProgress = false
+        resetPlayerPosition()
+        popRemainingDrops()
+
         player.die()
         removeAction(forKey: "gloop")
 
         enumerateChildNodes(withName: "co_*") { (node, stop)  in
             node.removeAction(forKey: "drop")
             node.physicsBody = nil
+        }
+    }
+
+    func resetPlayerPosition() {
+        if player.position.x > frame.midX {
+            player.moveToPosition(x: frame.midX, direction: .left, speed: player.movingSpeed * 2)
+        } else {
+            player.moveToPosition(x: frame.midX, direction: .right, speed: player.movingSpeed * 2)
+        }
+    }
+
+    func popRemainingDrops() {
+        var i = 0
+        enumerateChildNodes(withName: "co_*") {
+            (node, stop)  in
+            let initialWait = SKAction.wait(forDuration: 1)
+            let wait = SKAction.wait(forDuration: TimeInterval(0.15 * CGFloat(i)))
+            let removeFromParent = SKAction.removeFromParent()
+            let actionSequence = SKAction.sequence([initialWait, wait, removeFromParent])
+            node.run(actionSequence)
+            i += 1
         }
     }
 
@@ -166,6 +198,12 @@ class GameScene: SKScene {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let _ = touches.first else { return }
+
+        guard gameInProgress else {
+            spawnMultipleGloops()
+            return
+        }
+
         player.removeAction(forKey: PlayerActionType.moving.rawValue)
     }
 }
