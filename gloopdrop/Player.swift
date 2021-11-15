@@ -27,7 +27,7 @@ class Player: SKSpriteNode {
     private var walkTextures: [SKTexture]?
     private var dieTextures: [SKTexture]?
 
-    public var movingSpeed: Double = 2
+    public var movingSpeed: Double = 5
     
     // MARK: - INIT
     init() {

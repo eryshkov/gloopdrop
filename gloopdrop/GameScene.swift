@@ -24,6 +24,8 @@ class GameScene: SKScene {
     }
 
     var numberOfDrops: Int = 10
+    var dropsExpected: Int = 10
+    var dropsCollected: Int = 0
 
     var dropSpeed: CGFloat = 1
     var minDropSpeed: CGFloat = 0.12
@@ -33,6 +35,11 @@ class GameScene: SKScene {
     var levelLabel: SKLabelNode = SKLabelNode()
 
     var gameInProgress = false
+    var playingLevel = false
+
+    override func update(_ currentTime: TimeInterval) {
+        checkForRemainingDrops()
+    }
 
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -97,6 +104,22 @@ class GameScene: SKScene {
         collectible.drop(dropSpeed: TimeInterval(1), floorLevel: player.frame.minY)
     }
 
+    func checkForRemainingDrops() {
+        guard playingLevel else {return}
+        if dropsCollected == dropsExpected {
+            playingLevel = false
+            nextLevel()
+        }
+    }
+
+    func nextLevel() {
+        let wait = SKAction.wait(forDuration: 2.25)
+        run(wait) { [unowned self] in
+            self.level += 1
+            self.spawnMultipleGloops()
+        }
+    }
+
     func spawnMultipleGloops() {
         player.walk()
         if !gameInProgress {
@@ -117,6 +140,9 @@ class GameScene: SKScene {
             numberOfDrops = 150
         }
 
+        dropsCollected = 0
+        dropsExpected = numberOfDrops
+
         dropSpeed = 1 / (CGFloat(level) + (CGFloat(level) / CGFloat(numberOfDrops)))
         if dropSpeed < minDropSpeed {
             dropSpeed = minDropSpeed
@@ -132,6 +158,7 @@ class GameScene: SKScene {
         run(repeatAction, withKey: "gloop")
 
         gameInProgress = true
+        playingLevel = true
     }
 
     func gameOver() {
@@ -214,6 +241,7 @@ extension GameScene: SKPhysicsContactDelegate {
         if collision == PhysicsCategory.player | PhysicsCategory.collectible {
             let body = contact.bodyA.categoryBitMask == PhysicsCategory.collectible ? contact.bodyA.node : contact.bodyB.node
             if let sprite = body as? Collectible {
+                dropsCollected += 1
                 sprite.collected()
                 score += level
             }
@@ -222,8 +250,11 @@ extension GameScene: SKPhysicsContactDelegate {
         if collision == PhysicsCategory.foreground | PhysicsCategory.collectible {
             let body = contact.bodyA.categoryBitMask == PhysicsCategory.collectible ? contact.bodyA.node : contact.bodyB.node
             if let sprite = body as? Collectible {
-                sprite.missed()
-                gameOver()
+                dropsCollected += 1
+                sprite.collected()
+                score += level
+//                sprite.missed()
+//                gameOver()
             }
         }
     }
