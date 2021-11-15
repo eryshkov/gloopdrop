@@ -35,10 +35,10 @@ class GameScene: SKScene {
     var levelLabel: SKLabelNode = SKLabelNode()
 
     var gameInProgress = false
-    var playingLevel = false
+//    var playingLevel = false
 
     override func update(_ currentTime: TimeInterval) {
-        checkForRemainingDrops()
+//        checkForRemainingDrops()
     }
 
     override func didMove(to view: SKView) {
@@ -105,9 +105,9 @@ class GameScene: SKScene {
     }
 
     func checkForRemainingDrops() {
-        guard playingLevel else {return}
+//        guard playingLevel else {return}
         if dropsCollected == dropsExpected {
-            playingLevel = false
+//            playingLevel = false
             nextLevel()
         }
     }
@@ -158,7 +158,7 @@ class GameScene: SKScene {
         run(repeatAction, withKey: "gloop")
 
         gameInProgress = true
-        playingLevel = true
+//        playingLevel = true
     }
 
     func gameOver() {
@@ -244,6 +244,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 dropsCollected += 1
                 sprite.collected()
                 score += level
+                checkForRemainingDrops()
             }
         }
 
@@ -253,6 +254,7 @@ extension GameScene: SKPhysicsContactDelegate {
                 dropsCollected += 1
                 sprite.collected()
                 score += level
+                checkForRemainingDrops()
 //                sprite.missed()
 //                gameOver()
             }
