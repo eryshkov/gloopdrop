@@ -66,6 +66,7 @@ class GameScene: SKScene {
         addChild(player)
         setupLabels()
         swipeInit(to: self.view!)
+        showMessage("Tap to start game")
     }
 
     func setupLabels() {
@@ -113,6 +114,7 @@ class GameScene: SKScene {
     }
 
     func nextLevel() {
+        showMessage("Get Ready!")
         let wait = SKAction.wait(forDuration: 2.25)
         run(wait) { [unowned self] in
             self.level += 1
@@ -158,10 +160,12 @@ class GameScene: SKScene {
         run(repeatAction, withKey: "gloop")
 
         gameInProgress = true
+        hideMessage()
 //        playingLevel = true
     }
 
     func gameOver() {
+        showMessage("Game Over\nTap to try again")
         gameInProgress = false
         resetPlayerPosition()
         popRemainingDrops()
@@ -194,6 +198,40 @@ class GameScene: SKScene {
             node.run(actionSequence)
             i += 1
         }
+    }
+
+    func showMessage(_ message: String) {
+        let messageLabel = SKLabelNode()
+        messageLabel.name = "message"
+        messageLabel.position = CGPoint(x: frame.midX, y: player.frame.maxY + 100)
+        messageLabel.zPosition = Layer.ui.rawValue
+
+        messageLabel.numberOfLines = 2
+
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: SKColor(red: 251/255, green: 155/255, blue: 24/255, alpha: 1),
+            .backgroundColor: UIColor.clear,
+            .font: UIFont(name: "Nosifer", size: 45),
+            .paragraphStyle: paragraph
+        ]
+
+        messageLabel.attributedText = NSAttributedString(string: message, attributes: attributes)
+        messageLabel.run(SKAction.fadeIn(withDuration: 0.25))
+        addChild(messageLabel)
+    }
+
+    func hideMessage() {
+        guard let messageLabel = childNode(withName: "//message") as? SKLabelNode else { return }
+
+        messageLabel.run(
+            SKAction.sequence([
+                SKAction.fadeOut(withDuration: 0.25),
+                SKAction.removeFromParent()
+                              ])
+        )
     }
 
     // MARK: - TOUCH HANDLING
