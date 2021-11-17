@@ -289,12 +289,12 @@ extension GameScene: SKPhysicsContactDelegate {
         if collision == PhysicsCategory.foreground | PhysicsCategory.collectible {
             let body = contact.bodyA.categoryBitMask == PhysicsCategory.collectible ? contact.bodyA.node : contact.bodyB.node
             if let sprite = body as? Collectible {
-                dropsCollected += 1
-                sprite.collected()
-                score += level
-                checkForRemainingDrops()
-//                sprite.missed()
-//                gameOver()
+//                dropsCollected += 1
+//                sprite.collected()
+//                score += level
+//                checkForRemainingDrops()
+                sprite.missed()
+                gameOver()
             }
         }
     }
