@@ -17,6 +17,9 @@ class Collectible: SKSpriteNode {
     // MARK: - PROPERTIES
     private var collectibleType: CollectibleType = .none
 
+    private let playCollectSound = SKAction.playSoundFileNamed("collect.wav", waitForCompletion: false)
+    private let playMissSound = SKAction.playSoundFileNamed("miss.wav", waitForCompletion: false)
+
     // MARK: - INIT
     init(collectibleType: CollectibleType) {
         var texture: SKTexture!
@@ -62,11 +65,13 @@ class Collectible: SKSpriteNode {
 
     func collected() {
         let removeFromParent = SKAction.removeFromParent()
-        self.run(removeFromParent)
+        let actionGroup = SKAction.group([playCollectSound, removeFromParent])
+        self.run(actionGroup)
     }
 
     func missed() {
         let removeFromParent = SKAction.removeFromParent()
-        self.run(removeFromParent)
+        let actionGroup = SKAction.group([playMissSound, removeFromParent])
+        self.run(actionGroup)
     }
 }
