@@ -37,11 +37,17 @@ class GameScene: SKScene {
     var gameInProgress = false
 //    var playingLevel = false
 
+    let musicAudioNode = SKAudioNode(fileNamed: "music.mp3")
+
     override func update(_ currentTime: TimeInterval) {
 //        checkForRemainingDrops()
     }
 
     override func didMove(to view: SKView) {
+        musicAudioNode.autoplayLooped = true
+        musicAudioNode.isPositional = false
+        addChild(musicAudioNode)
+
         physicsWorld.contactDelegate = self
         // Set up background
         let background = SKSpriteNode(imageNamed: "background_1")
