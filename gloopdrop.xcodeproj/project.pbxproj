@@ -22,6 +22,7 @@
 		5CBB3BD626AA020400B9D999 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CBB3BD426AA020400B9D999 /* Main.storyboard */; };
 		5CBB3BD826AA020700B9D999 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CBB3BD726AA020700B9D999 /* Assets.xcassets */; };
 		5CF12B992725DA3400EFD39E /* Collectible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF12B982725DA3400EFD39E /* Collectible.swift */; };
+		5CFA5F312746F9F80078B7D9 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CFA5F302746F9F80078B7D9 /* music.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		5CBB3BD726AA020700B9D999 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = gloopdrop/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		5CBB3BD926AA020700B9D999 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CF12B982725DA3400EFD39E /* Collectible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collectible.swift; sourceTree = "<group>"; };
+		5CFA5F302746F9F80078B7D9 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,12 +104,21 @@
 				5C4766D52739A15C002FB634 /* Fonts */,
 				5CBB3BD426AA020400B9D999 /* Main.storyboard */,
 				5CBB3BD726AA020700B9D999 /* Assets.xcassets */,
+				5CFA5F2F2746F9F80078B7D9 /* Music */,
 				5C8ECEB827459DDD00646EAC /* Sounds */,
 				5C413F1826C0178A004B1EF1 /* Player.swift */,
 				5C413F1A26C01887004B1EF1 /* SpriteKitHelper.swift */,
 				5CBB3BD926AA020700B9D999 /* Info.plist */,
 			);
 			path = gloopdrop;
+			sourceTree = "<group>";
+		};
+		5CFA5F2F2746F9F80078B7D9 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				5CFA5F302746F9F80078B7D9 /* music.mp3 */,
+			);
+			path = Music;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CFA5F312746F9F80078B7D9 /* music.mp3 in Resources */,
 				5C8ECEC227459DDD00646EAC /* blob_mumble-2.wav in Resources */,
 				5C8ECEC427459DDD00646EAC /* blob_mumble-1.wav in Resources */,
 				5C8ECEC127459DDD00646EAC /* miss.wav in Resources */,

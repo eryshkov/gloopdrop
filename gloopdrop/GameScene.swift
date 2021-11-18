@@ -49,31 +49,31 @@ class GameScene: SKScene {
         musicAudioNode.isPositional = false
         addChild(musicAudioNode)
 
-//        physicsWorld.contactDelegate = self
-//        // Set up background
-//        let background = SKSpriteNode(imageNamed: "background_1")
-//        background.anchorPoint = CGPoint.zero
-//        background.zPosition = Layer.background.rawValue;
-//        background.position = CGPoint(x: 0, y: 0)
-//        addChild(background)
-//
-//        let foreground = SKSpriteNode(imageNamed: "foreground_1")
-//        foreground.anchorPoint = CGPoint.zero
-//        foreground.position = CGPoint(x: 0, y: 0)
-//        foreground.zPosition = Layer.foreground.rawValue
-//        foreground.physicsBody = SKPhysicsBody(edgeLoopFrom: foreground.frame)
-//        foreground.physicsBody?.affectedByGravity = false
-//        foreground.physicsBody?.categoryBitMask = PhysicsCategory.foreground
-//        foreground.physicsBody?.contactTestBitMask = PhysicsCategory.collectible
-//        foreground.physicsBody?.collisionBitMask = PhysicsCategory.none
-//        addChild(foreground)
-//
-//        player.position = CGPoint(x: size.width / 2, y: foreground.frame.maxY)
-//        player.setupConstraints(floor: foreground.frame.maxY, sceneWidth: self.size.width)
-//        addChild(player)
-//        setupLabels()
-//        swipeInit(to: self.view!)
-//        showMessage("Tap to start game")
+        physicsWorld.contactDelegate = self
+        // Set up background
+        let background = SKSpriteNode(imageNamed: "background_1")
+        background.anchorPoint = CGPoint.zero
+        background.zPosition = Layer.background.rawValue;
+        background.position = CGPoint(x: 0, y: 0)
+        addChild(background)
+
+        let foreground = SKSpriteNode(imageNamed: "foreground_1")
+        foreground.anchorPoint = CGPoint.zero
+        foreground.position = CGPoint(x: 0, y: 0)
+        foreground.zPosition = Layer.foreground.rawValue
+        foreground.physicsBody = SKPhysicsBody(edgeLoopFrom: foreground.frame)
+        foreground.physicsBody?.affectedByGravity = false
+        foreground.physicsBody?.categoryBitMask = PhysicsCategory.foreground
+        foreground.physicsBody?.contactTestBitMask = PhysicsCategory.collectible
+        foreground.physicsBody?.collisionBitMask = PhysicsCategory.none
+        addChild(foreground)
+
+        player.position = CGPoint(x: size.width / 2, y: foreground.frame.maxY)
+        player.setupConstraints(floor: foreground.frame.maxY, sceneWidth: self.size.width)
+        addChild(player)
+        setupLabels()
+        swipeInit(to: self.view!)
+        showMessage("Tap to start game")
     }
 
     func setupLabels() {
