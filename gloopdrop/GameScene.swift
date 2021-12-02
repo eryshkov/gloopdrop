@@ -39,6 +39,17 @@ class GameScene: SKScene {
 
     let musicAudioNode = SKAudioNode(fileNamed: "music.mp3")
 
+    // MARK: - Gloop Flow & Particle Effects
+    func setupGloopFlow() {
+        let gloopFlow = SKNode()
+        gloopFlow.name = "gloopFlow"
+        gloopFlow.zPosition = Layer.foreground.rawValue
+        gloopFlow.position = CGPoint(x: 0, y: -60)
+        gloopFlow.setupScrollingView(imageNamed: "flow_1", layer: Layer.foreground, blocks: 3, speed: 30)
+        addChild(gloopFlow)
+    }
+
+    // MARK: - GAME FUNCTIONS
     override func didMove(to view: SKView) {
         audioEngine.mainMixerNode.outputVolume = 0
         musicAudioNode.autoplayLooped = true
@@ -77,6 +88,7 @@ class GameScene: SKScene {
         setupLabels()
         swipeInit(to: self.view!)
         showMessage("Tap to start game")
+        setupGloopFlow()
     }
 
     func setupLabels() {
