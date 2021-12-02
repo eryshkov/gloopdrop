@@ -36,18 +36,21 @@ class GameScene: SKScene {
     var levelLabel: SKLabelNode = SKLabelNode()
 
     var gameInProgress = false
-//    var playingLevel = false
 
     let musicAudioNode = SKAudioNode(fileNamed: "music.mp3")
 
-    override func update(_ currentTime: TimeInterval) {
-//        checkForRemainingDrops()
-    }
-
     override func didMove(to view: SKView) {
+        audioEngine.mainMixerNode.outputVolume = 0
         musicAudioNode.autoplayLooped = true
         musicAudioNode.isPositional = false
         addChild(musicAudioNode)
+        musicAudioNode.run(SKAction.changeVolume(to: 0, duration: 0))
+
+        run(SKAction.wait(forDuration: 1)) {
+            [unowned self] in
+            self.audioEngine.mainMixerNode.outputVolume = 1
+            self.musicAudioNode.run(SKAction.changeVolume(to: 0.75, duration: 2))
+        }
 
         physicsWorld.contactDelegate = self
         // Set up background
