@@ -38,6 +38,7 @@ class GameScene: SKScene {
     var gameInProgress = false
 
     let musicAudioNode = SKAudioNode(fileNamed: "music.mp3")
+    let bubblesAudioNode = SKAudioNode(fileNamed: "bubbles.mp3")
 
     // MARK: - Gloop Flow & Particle Effects
     func setupGloopFlow() {
@@ -61,6 +62,10 @@ class GameScene: SKScene {
             [unowned self] in
             self.audioEngine.mainMixerNode.outputVolume = 1
             self.musicAudioNode.run(SKAction.changeVolume(to: 0.75, duration: 2))
+        }
+        run(SKAction.wait(forDuration: 1.5)) { [unowned self] in
+            self.bubblesAudioNode.autoplayLooped = true
+            self.addChild(self.bubblesAudioNode)
         }
 
         physicsWorld.contactDelegate = self
