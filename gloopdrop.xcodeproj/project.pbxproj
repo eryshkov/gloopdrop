@@ -10,6 +10,7 @@
 		5C413F1926C0178A004B1EF1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C413F1826C0178A004B1EF1 /* Player.swift */; };
 		5C413F1B26C01887004B1EF1 /* SpriteKitHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C413F1A26C01887004B1EF1 /* SpriteKitHelper.swift */; };
 		5C4766D72739A1D8002FB634 /* Nosifer-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C4766D62739A1D7002FB634 /* Nosifer-Regular.ttf */; };
+		5C75B92F2781BA5500507865 /* GloopFlow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5C75B92E2781BA5500507865 /* GloopFlow.sks */; };
 		5C8ECEBF27459DDD00646EAC /* bubbles.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5C8ECEB927459DDD00646EAC /* bubbles.mp3 */; };
 		5C8ECEC027459DDD00646EAC /* collect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5C8ECEBA27459DDD00646EAC /* collect.wav */; };
 		5C8ECEC127459DDD00646EAC /* miss.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5C8ECEBB27459DDD00646EAC /* miss.wav */; };
@@ -29,6 +30,7 @@
 		5C413F1826C0178A004B1EF1 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		5C413F1A26C01887004B1EF1 /* SpriteKitHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitHelper.swift; sourceTree = "<group>"; };
 		5C4766D62739A1D7002FB634 /* Nosifer-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nosifer-Regular.ttf"; sourceTree = "<group>"; };
+		5C75B92E2781BA5500507865 /* GloopFlow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GloopFlow.sks; sourceTree = "<group>"; };
 		5C8ECEB927459DDD00646EAC /* bubbles.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bubbles.mp3; sourceTree = "<group>"; };
 		5C8ECEBA27459DDD00646EAC /* collect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = collect.wav; sourceTree = "<group>"; };
 		5C8ECEBB27459DDD00646EAC /* miss.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = miss.wav; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			children = (
 				5CBB3BCA26AA020400B9D999 /* AppDelegate.swift */,
 				5CBB3BD026AA020400B9D999 /* GameScene.swift */,
+				5C75B92E2781BA5500507865 /* GloopFlow.sks */,
 				5CBB3BD226AA020400B9D999 /* GameViewController.swift */,
 				5CF12B982725DA3400EFD39E /* Collectible.swift */,
 				5C4766D52739A15C002FB634 /* Fonts */,
@@ -181,6 +184,7 @@
 				5CFA5F312746F9F80078B7D9 /* music.mp3 in Resources */,
 				5C8ECEC227459DDD00646EAC /* blob_mumble-2.wav in Resources */,
 				5C8ECEC427459DDD00646EAC /* blob_mumble-1.wav in Resources */,
+				5C75B92F2781BA5500507865 /* GloopFlow.sks in Resources */,
 				5C8ECEC127459DDD00646EAC /* miss.wav in Resources */,
 				5C8ECEC027459DDD00646EAC /* collect.wav in Resources */,
 				5C8ECEBF27459DDD00646EAC /* bubbles.mp3 in Resources */,
