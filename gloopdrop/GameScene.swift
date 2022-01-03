@@ -27,6 +27,7 @@ class GameScene: SKScene {
     var numberOfDrops: Int = 10
     var dropsExpected: Int = 10
     var dropsCollected: Int = 0
+    var prevDropLocation: CGFloat = 0
 
     var dropSpeed: CGFloat = 1
     var minDropSpeed: CGFloat = 0.12
@@ -129,7 +130,36 @@ class GameScene: SKScene {
 
         let margin = collectible.size.width * 2
         let dropRange = SKRange(lowerLimit: frame.minX + margin, upperLimit: frame.maxX - margin)
-        let randomX = CGFloat.random(in: dropRange.lowerLimit ... dropRange.upperLimit)
+        var randomX = CGFloat.random(in: dropRange.lowerLimit ... dropRange.upperLimit)
+        let randomModifier = SKRange(lowerLimit: 50 + CGFloat(level), upperLimit: 60 * CGFloat(level))
+        var modifier = CGFloat.random(in: randomModifier.lowerLimit...randomModifier.upperLimit)
+        if modifier > 400 {
+            modifier = 400
+        }
+        if prevDropLocation == 0 {
+            prevDropLocation = randomX
+        }
+        if prevDropLocation < randomX {
+            randomX = prevDropLocation + modifier
+        } else {
+            randomX = prevDropLocation - modifier
+        }
+        if randomX <= (frame.minX + margin) {
+            randomX = frame.minX + margin
+        } else if randomX >= (frame.maxX - margin) {
+            randomX = frame.maxX - margin
+        }
+        prevDropLocation = randomX
+
+        let xLabel = SKLabelNode()
+        xLabel.name = "dropNumber"
+        xLabel.fontName = "AvenirNext-DemiBold"
+        xLabel.fontColor = UIColor.yellow
+        xLabel.fontSize = 22
+        xLabel.text = "\(numberOfDrops)"
+        xLabel.position = CGPoint(x: 0, y: 2)
+        collectible.addChild(xLabel)
+        numberOfDrops -= 1
 
         collectible.position = CGPoint(x: randomX, y: viewTop())
         addChild(collectible)
