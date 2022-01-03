@@ -46,7 +46,11 @@ class GameScene: SKScene {
         gloopFlow.name = "gloopFlow"
         gloopFlow.zPosition = Layer.foreground.rawValue
         gloopFlow.position = CGPoint(x: 0, y: -60)
-        gloopFlow.setupScrollingView(imageNamed: "flow_1", layer: Layer.foreground, blocks: 3, speed: 30)
+        gloopFlow.setupScrollingView(imageNamed: "flow_1",
+                layer: Layer.foreground,
+                emitterNamed: "GloopFlow.sks",
+                blocks: 3,
+                speed: 30)
         addChild(gloopFlow)
     }
 
